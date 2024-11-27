@@ -7,7 +7,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Run k6 local test
-        uses: grafana/k6-action@v0.3.1
+      - uses: grafana/setup-k6-action@v1
         with:
-          filename: ./src/thresholds.js
+          browser: true
+      - uses: grafana/run-k6-action@v1
+        with:
+          path: |
+            ./src/thresholds.js
+            ./src/browser.js
